@@ -1,4 +1,4 @@
-// reteive locally stored data for order
+// reteive locally stored data from welcome.js for createOrder.js
 
 (function (global) {
     document.getElementById("tableNumber").innerHTML = global.localStorage.getItem("tableNumber");

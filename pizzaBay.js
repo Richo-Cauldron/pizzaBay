@@ -1,15 +1,6 @@
 
-// initiateOrder - enter and locally store customer name and table number
-(function (global) {
-    document.getElementById("customerInitiate").addEventListener("click", function () {
-        global.localStorage.setItem("tableNumber", document.getElementById("tableNumberInput").value);
-        global.localStorage.setItem("customerName", document.getElementById("customerNameInput").value);
-    }, false);
-}(window));
-(function (global) {
-    document.getElementById("tableNumber").innerHTML = global.localStorage.getItem("tableNumber");
-    document.getElementById("customerName").innerHTML = global.localStorage.getItem("customerName");
-}(window));
+
+
 // set empty order array outside function 
 //to catch all pizzas,sizes and prices chosen
 pizzas = [];
