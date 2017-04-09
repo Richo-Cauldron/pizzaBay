@@ -1,11 +1,21 @@
 // set empty arrays outside function 
 //to catch all pizzas,sizes and prices chosen
+// may want to call addPizzaPriceToOrder(sizeStr) from addPizzaSizeToOrder()??? 
 pizzas = [];
 sizes = [];
 prices = [];
 
-// addToOrder() function
+// Add To Order
 function addToOrder(){
+	addPizzaTypeToOrder();
+	addPizzaSizeToOrder();
+	addPizzaPriceToOrder();
+	addRemoveButtonToOrderedItem();
+	addOrderTotals();
+} // eo addToOrder()
+
+function addPizzaTypeToOrder(){
+	// alert("made it to addPizzaTypeToOrder");
 	// find selected pizza and push to pizzas array
 	var p = document.getElementById("pizza");
 	var pizzaStr = p.options[p.selectedIndex].text;
@@ -17,18 +27,20 @@ function addToOrder(){
 
 	//show order chosen in 'Order: section' of html
 	//target a <ul> in #salesOrder div
-	//add pizza items to a list
-	AddToPizzaListUl = document.getElementById("salesOrder").getElementsByTagName('ul')[0];
+	//add pizza items to a #pizzaList<ul>
+	var AddToPizzaListUl = document.getElementById("salesOrder").getElementsByTagName('ul')[0];
 
 	var newPizzaItem = document.createElement('li');
     for(i = 0; i <= (pizzasArrayLength-1); i++){
         newPizzaItem.textContent = pizzas[i];
         AddToPizzaListUl.appendChild(newPizzaItem);
     }
-   // find selected size and push to sizes array
+}//eo addPizzaToOrder()
+
+function addPizzaSizeToOrder(){
+	// find selected size and push to sizes array
 	var sizeStr = document.querySelector('input[name="size"]:checked').value;
 	sizes.push(sizeStr);
-	//alert(sizeStr);
 
 	//check length of sizes array in console
 	var sizesArrayLength = sizes.length;
@@ -40,9 +52,12 @@ function addToOrder(){
     for(i = 0; i <= (sizesArrayLength-1); i++){
         newSizeItem.textContent = sizes[i];
         AddToSizeListUl.appendChild(newSizeItem);
-    }
+	}
+}// eo addPizzaSizeToOrder()
 
-    //assert price to sizeStr chosen:
+function addPizzaPriceToOrder(){
+	var sizeStr = document.querySelector('input[name="size"]:checked').value;
+	//assert price to sizeStr chosen:
 	var price = 0;
 	switch(sizeStr) {
 	  	case 'M':
@@ -69,36 +84,47 @@ function addToOrder(){
         newPriceItem.textContent = prices[i];
         AddToPriceListUl.appendChild(newPriceItem);
     }
+}//eo addPizzaPriceToOrder()
 
-    //Add remove button to each pizza
+function addRemoveButtonToOrderedItem(){
+	//Add remove button to each pizza
     var removePizzaButton = document.createElement('button');
     removePizzaButton.innerHTML = "Remove"
-    for(i = 0; i <= (pricesArrayLength-1); i++){
+    for(i = 0; i <= (prices.length-1); i++){
     	var pizzaListItem = document.getElementById("pricesList").getElementsByTagName('li')[i];
     	//console.log(pizzaListItem);
     	pizzaListItem.appendChild(removePizzaButton);
     	removePizzaButton.setAttribute("id", "remove_pizza_" + prices.indexOf(prices[i]));
     	removePizzaButton.setAttribute("onClick", "removePizza(i)");
     }
-
-    //Totals
-    //Total pizzas ordered
-      var pizzaTotalTD = document.getElementById("orderTotals").getElementsByTagName('td')[1];
-      pizzaTotalTD.textContent = pizzasArrayLength;
-
-    //Total cost of order
-      var totalCost = 0;
-      var totalCostTD = document.getElementById("orderTotals").getElementsByTagName('td')[3];
-      for(i = 0; i <= (pricesArrayLength-1); i++){
-            totalCost += prices[i];
-        }
-      totalCostTD.textContent = totalCost;
-} // eo addToOrder()
+}// eo addRemoveButtonToOrderedItem()
 
 //remove pizza from order
-	function removePizza(x){
-		// console.log(x);
-		var pizzaToRemove = pizzas.indexOf(x);
-		console.log(pizzaToRemove);
-		
-	}
+function removePizza(x){
+	// console.log(x);
+	var pizzaToRemove = pizzas.indexOf(x);
+	console.log(pizzaToRemove);	
+} // eo removePizza()
+
+function addOrderTotals(){
+	pizzaTotal();
+	costTotal();
+}//eo orderTotals()
+
+function pizzaTotal(){
+	//Total pizzas ordered
+    var pizzaTotalTD = document.getElementById("orderTotals").getElementsByTagName('td')[1];
+    pizzaTotalTD.textContent = pizzas.length;
+} //eo pizzaTotal()
+
+function costTotal(){
+	var totalCost = 0;
+    var totalCostTD = document.getElementById("orderTotals").getElementsByTagName('td')[3];
+    for(i = 0; i <= (prices.length-1); i++){
+        totalCost += prices[i];
+    }
+    totalCostTD.textContent = totalCost;
+}// eo totalCost()
+
+
+

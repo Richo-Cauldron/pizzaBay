@@ -5,4 +5,4 @@ PizzaBAy - raw javascript attempt at interactive pizza menu
 - Finished cust_name_number branch 4/4/17
 - Start createOrder.php dev 5/4/17
 - Raw dev complete -> customer - pizza -size -price -totals
-
+- Refactored addToOrder() to call only functions - still need to dry refactor!
