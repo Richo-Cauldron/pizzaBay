@@ -16,12 +16,5 @@
 	    <a href="createOrder.php"><button id="customerInitiate">Initiate Order</button></a>
 	</div>
 </body>
-<script src="welcome.js">
-	// (function (global) {
- //    document.getElementById("customerInitiate").addEventListener("click", function () {
- //        global.localStorage.setItem("tableNumber", document.getElementById("tableNumberInput").value);
- //        global.localStorage.setItem("customerName", document.getElementById("customerNameInput").value);
- //    }, false);
-//}(window));
-</script>
+<script src="storeCustomerData.js"></script>
 </html>
